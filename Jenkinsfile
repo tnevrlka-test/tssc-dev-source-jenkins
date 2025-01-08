@@ -37,6 +37,7 @@ pipeline {
         COSIGN_SECRET_PASSWORD = credentials('COSIGN_SECRET_PASSWORD')
         COSIGN_SECRET_KEY = credentials('COSIGN_SECRET_KEY')
         COSIGN_PUBLIC_KEY = credentials('COSIGN_PUBLIC_KEY')
+        REKOR_HOST = credentials("REKOR_HOST') 
     }
     stages {
         stage('init') {
