@@ -5,7 +5,21 @@ library identifier: 'RHTAP_Jenkins@dev', retriever: modernSCM(
    remote: 'https://github.com/tnevrlka-test/tssc-sample-jenkins.git'])
 
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            label 'jenkins-agent'
+            cloud 'openshift'
+            serviceAccount 'jenkins'
+            podRetention onFailure()
+            idleMinutes '30'
+            containerTemplate {
+                name 'jnlp'
+                image 'image-registry.openshift-image-registry.svc:5000/jenkins/jenkins-agent-base:latest'
+                ttyEnabled true
+                args '${computer.jnlpmac} ${computer.name}'
+            }
+        }
+    }
     environment {
         ROX_API_TOKEN = credentials('ROX_API_TOKEN')
         ROX_CENTRAL_ENDPOINT = credentials('ROX_CENTRAL_ENDPOINT')
