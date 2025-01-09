@@ -49,7 +49,7 @@ export HOMEDIR=${HOMEDIR-$(pwd)}
 export FAIL_IF_TRUSTIFICATION_NOT_CONFIGURED=false
 
 export SBOMS_DIR=results/sboms
-export REKOR_HOST=
+export REKOR_HOST={$REKOR_HOST:-""}
 export IGNORE_REKOR=true
 export TUF_MIRROR=
 # Update forced CI test st 8. ledna 2025, 16:38:48 CET
